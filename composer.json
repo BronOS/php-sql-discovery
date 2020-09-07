@@ -1,0 +1,44 @@
+{
+  "name": "bronos/php-sql-discovery",
+  "description": "PHP SQL schema discovery",
+  "keywords": [
+    "php",
+    "db",
+    "sql",
+    "schema",
+    "discovery",
+    "scanner",
+    "database"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Oleg Bronzov",
+      "email": "oleg.bronzov@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:BronOS/php-sql-schema.git"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-pdo": "*",
+    "bronos/php-sql-schema": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "BronOS\\PhpSqlDiscovery\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "BronOS\\PhpSqlDiscovery\\Tests\\": "tests/"
+    }
+  }
+}
