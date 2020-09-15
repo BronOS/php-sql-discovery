@@ -77,7 +77,7 @@ class TableFactory implements TableFactoryInterface
             $relations,
             $row[self::KEY_ENGINE],
             $row[self::KEY_CHARSET],
-            $row[self::KEY_COLLATE]
+            $row[self::KEY_COLLATE] == $row[self::KEY_DEFAULT_COLLATION] ? null : $row[self::KEY_COLLATE]
         );
     }
 }

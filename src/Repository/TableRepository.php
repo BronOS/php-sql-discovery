@@ -58,10 +58,20 @@ class TableRepository extends AbstractRepository implements TableRepositoryInter
     public function findInfo(string $tableName): array
     {
         return $this->fetchOne("
-                SELECT T.TABLE_NAME, T.ENGINE, T.TABLE_COLLATION, CCSA.CHARACTER_SET_NAME 
+                SELECT 
+                       T.TABLE_NAME, 
+                       T.ENGINE, 
+                       T.TABLE_COLLATION, 
+                       CCSA.CHARACTER_SET_NAME, 
+                       C.COLLATION_NAME AS DEFAULT_COLLATION 
                 FROM information_schema.TABLES T
                 LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
                     T.TABLE_COLLATION = CCSA.COLLATION_NAME
+                )
+                LEFT JOIN information_schema.COLLATIONS C ON (
+                    C.CHARACTER_SET_NAME = CCSA.CHARACTER_SET_NAME 
+                        AND 
+                    IS_DEFAULT = 'Yes'
                 )
                 WHERE TABLE_NAME = ? AND TABLE_SCHEMA = ?
             ",
@@ -79,10 +89,20 @@ class TableRepository extends AbstractRepository implements TableRepositoryInter
     public function findInfoAll(): array
     {
         return $this->fetchAll("
-                SELECT T.TABLE_NAME, T.ENGINE, T.TABLE_COLLATION, CCSA.CHARACTER_SET_NAME 
+                SELECT 
+                       T.TABLE_NAME, 
+                       T.ENGINE, 
+                       T.TABLE_COLLATION, 
+                       CCSA.CHARACTER_SET_NAME, 
+                       C.COLLATION_NAME AS DEFAULT_COLLATION 
                 FROM information_schema.TABLES T
                 LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
                     T.TABLE_COLLATION = CCSA.COLLATION_NAME
+                )
+                LEFT JOIN information_schema.COLLATIONS C ON (
+                    C.CHARACTER_SET_NAME = CCSA.CHARACTER_SET_NAME 
+                        AND 
+                    IS_DEFAULT = 'Yes'
                 )
                 WHERE TABLE_SCHEMA = ?
             ",

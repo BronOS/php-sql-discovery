@@ -58,6 +58,10 @@ class IndexFactory implements IndexFactoryInterface
      * @param array $rows
      *
      * @return IndexInterface[]
+     *
+     * @throws DuplicateIndexFieldException
+     * @throws EmptyIndexFieldListException
+     * @throws InvalidIndexFieldTypeException
      */
     public function fromRows(array $rows): array
     {
@@ -93,13 +97,13 @@ class IndexFactory implements IndexFactoryInterface
         if ($row[self::KEY_NON_UNIQUE] == 0) {
             return new UniqueKey(
                 $this->getFields($row[self::KEY_NAME], $rows),
-                $row[self::KEY_COLUMN_NAME]
+                $row[self::KEY_NAME]
             );
         }
 
         return new Key(
             $this->getFields($row[self::KEY_NAME], $rows),
-            $row[self::KEY_COLUMN_NAME]
+            $row[self::KEY_NAME]
         );
     }
 

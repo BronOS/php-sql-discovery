@@ -33,11 +33,11 @@ class IndexFactoryTest extends BaseTestCase
         $this->assertEquals(['unq_1', 'unq_2'], $indexes[1]->getFields());
 
         $this->assertInstanceOf(KeyInterface::class, $indexes[2]);
-        $this->assertEquals('blog_id', $indexes[2]->getName());
-        $this->assertEquals(['blog_id'], $indexes[2]->getFields());
+        $this->assertEquals('keywords', $indexes[2]->getName());
+        $this->assertEquals(['keywords'], $indexes[2]->getFields());
 
         $this->assertInstanceOf(KeyInterface::class, $indexes[3]);
-        $this->assertEquals('keywords', $indexes[3]->getName());
-        $this->assertEquals(['keywords'], $indexes[3]->getFields());
+        $this->assertEquals('post_ibfk_1', $indexes[3]->getName());
+        $this->assertEquals(['blog_id'], $indexes[3]->getFields());
     }
 }

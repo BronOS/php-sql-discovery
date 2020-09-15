@@ -57,6 +57,7 @@ interface TableFactoryInterface
     public const KEY_ENGINE = 'ENGINE';
     public const KEY_CHARSET = 'CHARACTER_SET_NAME';
     public const KEY_COLLATE = 'TABLE_COLLATION';
+    public const KEY_DEFAULT_COLLATION = 'DEFAULT_COLLATION';
 
     /**
      * Makes table object from database row.

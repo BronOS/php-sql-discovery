@@ -34,6 +34,9 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory;
 
 
+use BronOS\PhpSqlSchema\Exception\DuplicateIndexFieldException;
+use BronOS\PhpSqlSchema\Exception\EmptyIndexFieldListException;
+use BronOS\PhpSqlSchema\Exception\InvalidIndexFieldTypeException;
 use BronOS\PhpSqlSchema\Index\IndexInterface;
 
 /**
@@ -58,6 +61,10 @@ interface IndexFactoryInterface
      * @param array $rows
      *
      * @return IndexInterface[]
+     *
+     * @throws DuplicateIndexFieldException
+     * @throws EmptyIndexFieldListException
+     * @throws InvalidIndexFieldTypeException
      */
     public function fromRows(array $rows): array;
 }
