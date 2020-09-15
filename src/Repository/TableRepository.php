@@ -68,4 +68,25 @@ class TableRepository extends AbstractRepository implements TableRepositoryInter
             [$tableName, $this->fetchDbName()]
         );
     }
+
+    /**
+     * Find all table's info/metadata and returns it as a raw array.
+     *
+     * @return array
+     *
+     * @throws PhpSqlDiscoveryException
+     */
+    public function findInfoAll(): array
+    {
+        return $this->fetchAll("
+                SELECT T.TABLE_NAME, T.ENGINE, T.TABLE_COLLATION, CCSA.CHARACTER_SET_NAME 
+                FROM information_schema.TABLES T
+                LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
+                    T.TABLE_COLLATION = CCSA.COLLATION_NAME
+                )
+                WHERE TABLE_SCHEMA = ?
+            ",
+            [$this->fetchDbName()]
+        );
+    }
 }

@@ -56,4 +56,13 @@ interface TableRepositoryInterface
      * @throws PhpSqlDiscoveryException
      */
     public function findInfo(string $tableName): array;
+
+    /**
+     * Find all table's info/metadata and returns it as a raw array.
+     *
+     * @return array
+     *
+     * @throws PhpSqlDiscoveryException
+     */
+    public function findInfoAll(): array;
 }

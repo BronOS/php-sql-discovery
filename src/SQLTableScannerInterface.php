@@ -65,4 +65,18 @@ interface SQLTableScannerInterface
      * @throws SQLTableSchemaDeclarationException
      */
     public function scan(string $tableName): SQLTableSchemaInterface;
+
+    /**
+     * Scans all database table's meta data and returns key~>value array of SQLTableSchema objects as a result,
+     * where key is a table name and value SQLTableSchemaInterface
+     *
+     * @return SQLTableSchemaInterface[]
+     *
+     * @throws PhpSqlDiscoveryException
+     * @throws DuplicateColumnException
+     * @throws DuplicateIndexException
+     * @throws DuplicateRelationException
+     * @throws SQLTableSchemaDeclarationException
+     */
+    public function scanAll(): array;
 }

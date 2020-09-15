@@ -19,7 +19,7 @@ use BronOS\PhpSqlSchema\SQLTableSchemaInterface;
 
 class SQLTableScannerTest extends BaseTestCase
 {
-    public function testFindAll()
+    public function testScan()
     {
         $indexRepo = new IndexRepository($this->getPdo());
         $indexFactory = new IndexFactory();
@@ -46,5 +46,36 @@ class SQLTableScannerTest extends BaseTestCase
         $this->assertCount(9, $table->getColumns());
         $this->assertCount(4, $table->getIndexes());
         $this->assertCount(1, $table->getRelations());
+    }
+
+    public function testScanAll()
+    {
+        $indexRepo = new IndexRepository($this->getPdo());
+        $indexFactory = new IndexFactory();
+        $indexScanner = new SQLIndexScanner($indexRepo, $indexFactory);
+
+        $relRepo = new ForeignKeyRepository($this->getPdo());
+        $relFactory = new ForeignKeyFactory();
+        $relScanner = new SQLRelationScanner($relRepo, $relFactory);
+
+        $colRepo = new ColumnRepository($this->getPdo());
+        $colFactory = new DefaultColumnFactory();
+        $colScanner = new SQLColumnScanner($colRepo, $colFactory);
+
+        $repo = new TableRepository($this->getPdo());
+        $factory = new TableFactory();
+        $scanner = new SQLTableScanner($repo, $factory, $indexScanner, $relScanner, $colScanner);
+
+        $tables = $scanner->scanAll();
+
+        $this->assertIsArray($tables);
+        $this->assertCount(3, $tables);
+        $this->assertArrayHasKey('blog', $tables);
+        $this->assertArrayHasKey('post', $tables);
+        $this->assertArrayHasKey('types', $tables);
+
+        $this->assertInstanceOf(SQLTableSchemaInterface::class, $tables['blog']);
+        $this->assertInstanceOf(SQLTableSchemaInterface::class, $tables['post']);
+        $this->assertInstanceOf(SQLTableSchemaInterface::class, $tables['types']);
     }
 }

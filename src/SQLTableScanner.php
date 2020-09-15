@@ -104,4 +104,34 @@ class SQLTableScanner implements SQLTableScannerInterface
             $this->relationScanner->scan($tableName)
         );
     }
+
+    /**
+     * Scans all database table's meta data and returns key~>value array of SQLTableSchema objects as a result,
+     * where key is a table name and value SQLTableSchemaInterface
+     *
+     * @return SQLTableSchemaInterface[]
+     *
+     * @throws PhpSqlDiscoveryException
+     * @throws DuplicateColumnException
+     * @throws DuplicateIndexException
+     * @throws DuplicateRelationException
+     * @throws SQLTableSchemaDeclarationException
+     */
+    public function scanAll(): array
+    {
+        $res = [];
+
+        foreach ($this->repository->findInfoAll() as $row) {
+            $tableName = $row[$this->factory::KEY_TABLE_NAME];
+
+            $res[$tableName] = $this->factory->make(
+                $row,
+                $this->columnScanner->scan($tableName),
+                $this->indexScanner->scan($tableName),
+                $this->relationScanner->scan($tableName)
+            );
+        }
+
+        return $res;
+    }
 }
