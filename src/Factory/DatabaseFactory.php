@@ -49,10 +49,6 @@ use BronOS\PhpSqlSchema\SQLDatabaseSchemaInterface;
  */
 class DatabaseFactory implements DatabaseFactoryInterface
 {
-    public const KEY_DEFAULT_ENGINE = 'default_engine';
-    public const KEY_DEFAULT_CHARSET = 'default_character_set_name';
-    public const KEY_DEFAULT_COLLATION = 'default_collation_name';
-
     /**
      * Makes new sql database object.
      *
