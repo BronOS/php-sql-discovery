@@ -44,7 +44,7 @@ use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-interface TableRepositoryInterface
+interface TableRepositoryInterface extends RepositoryInterface
 {
     /**
      * Find table's info/metadata and returns it as a raw array.

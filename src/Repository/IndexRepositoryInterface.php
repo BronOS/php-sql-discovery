@@ -44,7 +44,7 @@ use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-interface IndexRepositoryInterface
+interface IndexRepositoryInterface extends RepositoryInterface
 {
     /**
      * Find indexes and returns it as a raw array.

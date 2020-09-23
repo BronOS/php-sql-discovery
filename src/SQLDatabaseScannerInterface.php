@@ -31,50 +31,38 @@
 
 declare(strict_types=1);
 
-namespace BronOS\PhpSqlDiscovery\Factory;
+namespace BronOS\PhpSqlDiscovery;
 
 
-use BronOS\PhpSqlSchema\Column\ColumnInterface;
+use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
 use BronOS\PhpSqlSchema\Exception\DuplicateColumnException;
+use BronOS\PhpSqlSchema\Exception\DuplicateIndexException;
+use BronOS\PhpSqlSchema\Exception\DuplicateRelationException;
+use BronOS\PhpSqlSchema\Exception\DuplicateTableException;
 use BronOS\PhpSqlSchema\Exception\SQLTableSchemaDeclarationException;
-use BronOS\PhpSqlSchema\Index\IndexInterface;
-use BronOS\PhpSqlSchema\Relation\ForeignKeyInterface;
-use BronOS\PhpSqlSchema\SQLTableSchema;
-use BronOS\PhpSqlSchema\SQLTableSchemaInterface;
+use BronOS\PhpSqlSchema\SQLDatabaseSchemaInterface;
 
 /**
- * Table factory.
+ * Database scanner.
  *
  * @package   bronos\php-sql-discovery
  * @author    Oleg Bronzov <oleg.bronzov@gmail.com>
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-class TableFactory implements TableFactoryInterface
+interface SQLDatabaseScannerInterface
 {
     /**
-     * Makes table object from database row.
+     * Scans database meta data and returns it as a SQLTableSchemaInterface object.
      *
-     * @param array                 $row
-     * @param ColumnInterface[]     $columns
-     * @param IndexInterface[]      $indexes
-     * @param ForeignKeyInterface[] $relations
+     * @return SQLDatabaseSchemaInterface
      *
-     * @return SQLTableSchemaInterface
-     *
+     * @throws PhpSqlDiscoveryException
      * @throws DuplicateColumnException
+     * @throws DuplicateIndexException
+     * @throws DuplicateRelationException
      * @throws SQLTableSchemaDeclarationException
+     * @throws DuplicateTableException
      */
-    public function make(array $row, array $columns, array $indexes, array $relations): SQLTableSchemaInterface
-    {
-        return new SQLTableSchema(
-            $row[self::KEY_TABLE_NAME],
-            $columns,
-            $indexes,
-            $relations,
-            $row[self::KEY_ENGINE],
-            $row[self::KEY_CHARSET],
-            $row[self::KEY_COLLATE]
-        );
-    }
+    public function scan(): SQLDatabaseSchemaInterface;
 }

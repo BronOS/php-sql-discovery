@@ -44,7 +44,7 @@ use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-interface ForeignKeyRepositoryInterface
+interface ForeignKeyRepositoryInterface extends RepositoryInterface
 {
     /**
      * Find foreign key and returns it as a raw array.

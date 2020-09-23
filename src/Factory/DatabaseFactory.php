@@ -34,47 +34,48 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory;
 
 
-use BronOS\PhpSqlSchema\Column\ColumnInterface;
-use BronOS\PhpSqlSchema\Exception\DuplicateColumnException;
+use BronOS\PhpSqlSchema\Exception\DuplicateTableException;
 use BronOS\PhpSqlSchema\Exception\SQLTableSchemaDeclarationException;
-use BronOS\PhpSqlSchema\Index\IndexInterface;
-use BronOS\PhpSqlSchema\Relation\ForeignKeyInterface;
-use BronOS\PhpSqlSchema\SQLTableSchema;
-use BronOS\PhpSqlSchema\SQLTableSchemaInterface;
+use BronOS\PhpSqlSchema\SQLDatabaseSchema;
+use BronOS\PhpSqlSchema\SQLDatabaseSchemaInterface;
 
 /**
- * Table factory.
+ * SQL database schema factory.
  *
  * @package   bronos\php-sql-discovery
  * @author    Oleg Bronzov <oleg.bronzov@gmail.com>
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-class TableFactory implements TableFactoryInterface
+class DatabaseFactory implements DatabaseFactoryInterface
 {
+    public const KEY_DEFAULT_ENGINE = 'default_engine';
+    public const KEY_DEFAULT_CHARSET = 'default_character_set_name';
+    public const KEY_DEFAULT_COLLATION = 'default_collation_name';
+
     /**
-     * Makes table object from database row.
+     * Makes new sql database object.
      *
-     * @param array                 $row
-     * @param ColumnInterface[]     $columns
-     * @param IndexInterface[]      $indexes
-     * @param ForeignKeyInterface[] $relations
+     * @param string $dbName
+     * @param array  $tables
+     * @param array  $defaultsRow
      *
-     * @return SQLTableSchemaInterface
+     * @return SQLDatabaseSchemaInterface
      *
-     * @throws DuplicateColumnException
      * @throws SQLTableSchemaDeclarationException
+     * @throws DuplicateTableException
      */
-    public function make(array $row, array $columns, array $indexes, array $relations): SQLTableSchemaInterface
-    {
-        return new SQLTableSchema(
-            $row[self::KEY_TABLE_NAME],
-            $columns,
-            $indexes,
-            $relations,
-            $row[self::KEY_ENGINE],
-            $row[self::KEY_CHARSET],
-            $row[self::KEY_COLLATE]
+    public function make(
+        string $dbName,
+        array $tables,
+        array $defaultsRow
+    ): SQLDatabaseSchemaInterface {
+        return new SQLDatabaseSchema(
+            $dbName,
+            $tables,
+            $defaultsRow[self::KEY_DEFAULT_ENGINE],
+            $defaultsRow[self::KEY_DEFAULT_CHARSET],
+            $defaultsRow[self::KEY_DEFAULT_COLLATION],
         );
     }
 }

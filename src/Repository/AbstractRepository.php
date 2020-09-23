@@ -44,7 +44,7 @@ use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-abstract class AbstractRepository
+abstract class AbstractRepository implements RepositoryInterface
 {
     protected \PDO $pdo;
 
@@ -119,11 +119,13 @@ abstract class AbstractRepository
     }
 
     /**
+     * Finds database name.
+     *
      * @return string
      *
      * @throws PhpSqlDiscoveryException
      */
-    protected function fetchDbName(): string
+    public function fetchDbName(): string
     {
         return $this->fetchColumn('dbname', 'SELECT database() AS dbname');
     }

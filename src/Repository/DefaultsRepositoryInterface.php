@@ -31,50 +31,27 @@
 
 declare(strict_types=1);
 
-namespace BronOS\PhpSqlDiscovery\Factory;
+namespace BronOS\PhpSqlDiscovery\Repository;
 
 
-use BronOS\PhpSqlSchema\Column\ColumnInterface;
-use BronOS\PhpSqlSchema\Exception\DuplicateColumnException;
-use BronOS\PhpSqlSchema\Exception\SQLTableSchemaDeclarationException;
-use BronOS\PhpSqlSchema\Index\IndexInterface;
-use BronOS\PhpSqlSchema\Relation\ForeignKeyInterface;
-use BronOS\PhpSqlSchema\SQLTableSchema;
-use BronOS\PhpSqlSchema\SQLTableSchemaInterface;
+use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
 
 /**
- * Table factory.
+ * Defaults repository interface.
  *
  * @package   bronos\php-sql-discovery
  * @author    Oleg Bronzov <oleg.bronzov@gmail.com>
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-class TableFactory implements TableFactoryInterface
+interface DefaultsRepositoryInterface extends RepositoryInterface
 {
     /**
-     * Makes table object from database row.
+     * Find defaults metadata of a database and returns it as a raw array.
      *
-     * @param array                 $row
-     * @param ColumnInterface[]     $columns
-     * @param IndexInterface[]      $indexes
-     * @param ForeignKeyInterface[] $relations
+     * @return array
      *
-     * @return SQLTableSchemaInterface
-     *
-     * @throws DuplicateColumnException
-     * @throws SQLTableSchemaDeclarationException
+     * @throws PhpSqlDiscoveryException
      */
-    public function make(array $row, array $columns, array $indexes, array $relations): SQLTableSchemaInterface
-    {
-        return new SQLTableSchema(
-            $row[self::KEY_TABLE_NAME],
-            $columns,
-            $indexes,
-            $relations,
-            $row[self::KEY_ENGINE],
-            $row[self::KEY_CHARSET],
-            $row[self::KEY_COLLATE]
-        );
-    }
+    public function findInfo(): array;
 }

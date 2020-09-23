@@ -44,7 +44,7 @@ use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
  * @copyright 2020
  * @license   https://opensource.org/licenses/MIT
  */
-interface ColumnRepositoryInterface
+interface ColumnRepositoryInterface extends RepositoryInterface
 {
     /**
      * Find all table columns and returns it as a raw array.

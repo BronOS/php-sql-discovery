@@ -36,8 +36,6 @@ namespace BronOS\PhpSqlDiscovery\Factory;
 
 use BronOS\PhpSqlSchema\Column\ColumnInterface;
 use BronOS\PhpSqlSchema\Exception\DuplicateColumnException;
-use BronOS\PhpSqlSchema\Exception\DuplicateIndexException;
-use BronOS\PhpSqlSchema\Exception\DuplicateRelationException;
 use BronOS\PhpSqlSchema\Exception\SQLTableSchemaDeclarationException;
 use BronOS\PhpSqlSchema\Index\IndexInterface;
 use BronOS\PhpSqlSchema\Relation\ForeignKeyInterface;
@@ -57,7 +55,6 @@ interface TableFactoryInterface
     public const KEY_ENGINE = 'ENGINE';
     public const KEY_CHARSET = 'CHARACTER_SET_NAME';
     public const KEY_COLLATE = 'TABLE_COLLATION';
-    public const KEY_DEFAULT_COLLATION = 'DEFAULT_COLLATION';
 
     /**
      * Makes table object from database row.
@@ -70,9 +67,8 @@ interface TableFactoryInterface
      * @return SQLTableSchemaInterface
      *
      * @return SQLTableSchemaInterface
+     *
      * @throws DuplicateColumnException
-     * @throws DuplicateIndexException
-     * @throws DuplicateRelationException
      * @throws SQLTableSchemaDeclarationException
      */
     public function make(array $row, array $columns, array $indexes, array $relations): SQLTableSchemaInterface;
