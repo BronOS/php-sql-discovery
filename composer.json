@@ -17,16 +17,10 @@
       "email": "oleg.bronzov@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:BronOS/php-sql-schema.git"
-    }
-  ],
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
-    "bronos/php-sql-schema": "dev-master"
+    "bronos/php-sql-schema": "1.*"
   },
   "require-dev": {
     "phpunit/phpunit": "*"
