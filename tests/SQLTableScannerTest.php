@@ -42,7 +42,7 @@ class SQLTableScannerTest extends BaseTestCase
         $this->assertInstanceOf(SQLTableSchemaInterface::class, $table);
         $this->assertEquals('post', $table->getName());
         $this->assertEquals('InnoDB', $table->getEngine());
-        $this->assertEquals('latin1', $table->getDefaultCharset());
+        $this->assertEquals('latin1', $table->getCharset());
         $this->assertCount(9, $table->getColumns());
         $this->assertCount(4, $table->getIndexes());
         $this->assertCount(1, $table->getRelations());
