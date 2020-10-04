@@ -43,6 +43,7 @@ use BronOS\PhpSqlSchema\Exception\DuplicateRelationException;
 use BronOS\PhpSqlSchema\Exception\DuplicateTableException;
 use BronOS\PhpSqlSchema\Exception\SQLTableSchemaDeclarationException;
 use BronOS\PhpSqlSchema\SQLDatabaseSchemaInterface;
+use BronOS\PhpSqlSchema\SQLTableSchemaInterface;
 
 /**
  * Database scanner.
@@ -78,21 +79,47 @@ class SQLDatabaseScanner implements SQLDatabaseScannerInterface
     /**
      * Scans database meta data and returns it as a SQLTableSchemaInterface object.
      *
+     * @param array $tables
+     *
      * @return SQLDatabaseSchemaInterface
      *
-     * @throws PhpSqlDiscoveryException
      * @throws DuplicateColumnException
      * @throws DuplicateIndexException
      * @throws DuplicateRelationException
-     * @throws SQLTableSchemaDeclarationException
      * @throws DuplicateTableException
+     * @throws PhpSqlDiscoveryException
+     * @throws SQLTableSchemaDeclarationException
      */
-    public function scan(): SQLDatabaseSchemaInterface
+    public function scan(array $tables = []): SQLDatabaseSchemaInterface
     {
         return $this->dbFactory->make(
             $this->defaultsRepository->fetchDbName(),
-            $this->tableScanner->scanAll(),
+            $this->getTables($tables),
             $this->defaultsRepository->findInfo()
         );
+    }
+
+    /**
+     * @param string[] $tableNames
+     *
+     * @return SQLTableSchemaInterface[]
+     *
+     * @throws DuplicateColumnException
+     * @throws DuplicateIndexException
+     * @throws DuplicateRelationException
+     * @throws PhpSqlDiscoveryException
+     * @throws SQLTableSchemaDeclarationException
+     */
+    private function getTables(array $tableNames = []): array
+    {
+        if (count($tableNames) == 0) {
+            return $this->tableScanner->scanAll();
+        }
+
+        $tables = [];
+        foreach ($tables as $tableName) {
+            $tables[] = $this->tableScanner->scan($tableName);
+        }
+        return $tables;
     }
 }

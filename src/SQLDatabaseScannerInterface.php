@@ -55,6 +55,8 @@ interface SQLDatabaseScannerInterface
     /**
      * Scans database meta data and returns it as a SQLTableSchemaInterface object.
      *
+     * @param array $tables
+     *
      * @return SQLDatabaseSchemaInterface
      *
      * @throws PhpSqlDiscoveryException
@@ -64,5 +66,5 @@ interface SQLDatabaseScannerInterface
      * @throws SQLTableSchemaDeclarationException
      * @throws DuplicateTableException
      */
-    public function scan(): SQLDatabaseSchemaInterface;
+    public function scan(array $tables = []): SQLDatabaseSchemaInterface;
 }
