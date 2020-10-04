@@ -53,6 +53,6 @@ abstract class AbstractDateColumnFactory extends AbstractTypedColumnFactory
      */
     protected function isDefaultTimestamp(array $row): bool
     {
-        return strtolower($this->getDefault($row)) === self::CURRENT_TIMESTAMP_KEYWORD;
+        return strtolower((string)$this->getDefault($row)) === self::CURRENT_TIMESTAMP_KEYWORD;
     }
 }
