@@ -71,6 +71,7 @@ class TimestampColumnFactory extends AbstractDateTimeColumnFactory implements Ti
     {
         return new TimestampColumn(
             $this->getName($row),
+            $this->isNullable($row),
             $this->isDefaultTimestamp($row),
             $this->isOnUpdateTimestamp($row),
             $this->getDefault($row),
