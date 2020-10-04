@@ -117,7 +117,7 @@ class SQLDatabaseScanner implements SQLDatabaseScannerInterface
         }
 
         $tables = [];
-        foreach ($tables as $tableName) {
+        foreach ($tableNames as $tableName) {
             $tables[] = $this->tableScanner->scan($tableName);
         }
         return $tables;
