@@ -60,9 +60,11 @@ interface TableRepositoryInterface extends RepositoryInterface
     /**
      * Find all table's info/metadata and returns it as a raw array.
      *
+     * @param array $ignoreTables
+     *
      * @return array
      *
      * @throws PhpSqlDiscoveryException
      */
-    public function findInfoAll(): array;
+    public function findInfoAll(array $ignoreTables = []): array;
 }

@@ -76,25 +76,36 @@ class TableRepository extends AbstractRepository implements TableRepositoryInter
     /**
      * Find all table's info/metadata and returns it as a raw array.
      *
+     * @param array $ignoreTables
+     *
      * @return array
      *
      * @throws PhpSqlDiscoveryException
      */
-    public function findInfoAll(): array
+    public function findInfoAll(array $ignoreTables = []): array
     {
-        return $this->fetchAll("
-                SELECT 
-                       T.TABLE_NAME, 
-                       T.ENGINE, 
-                       T.TABLE_COLLATION, 
-                       CCSA.CHARACTER_SET_NAME
-                FROM information_schema.TABLES T
-                LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
-                    T.TABLE_COLLATION = CCSA.COLLATION_NAME
-                )
-                WHERE TABLE_SCHEMA = ?
-            ",
-            [$this->fetchDbName()]
-        );
+        $q = "SELECT 
+               T.TABLE_NAME, 
+               T.ENGINE, 
+               T.TABLE_COLLATION, 
+               CCSA.CHARACTER_SET_NAME
+        FROM information_schema.TABLES T
+        LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
+            T.TABLE_COLLATION = CCSA.COLLATION_NAME
+        )
+        WHERE TABLE_SCHEMA = ?";
+
+        if (count($ignoreTables) > 0) {
+            $q .= " AND TABLE_NAME NOT IN ({$this->ignoreTablesToString($ignoreTables)})";
+        }
+
+        return $this->fetchAll($q, [$this->fetchDbName()]);
+    }
+
+    private function ignoreTablesToString(array $ignoreTables): string
+    {
+        return implode(", ", array_map(function (string $tableName) {
+            return sprintf("'%s'", $tableName);
+        }, $ignoreTables));
     }
 }
