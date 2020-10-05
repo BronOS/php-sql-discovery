@@ -34,6 +34,8 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory\Column;
 
 
+use BronOS\PhpSqlDiscovery\Factory\Column\Helper\SizeHelperTrait;
+
 /**
  * Abstract date column factory.
  *
@@ -44,7 +46,9 @@ namespace BronOS\PhpSqlDiscovery\Factory\Column;
  */
 abstract class AbstractDateColumnFactory extends AbstractTypedColumnFactory
 {
-    private const CURRENT_TIMESTAMP_KEYWORD = 'current_timestamp()';
+    use SizeHelperTrait;
+
+    private const CURRENT_TIMESTAMP_KEYWORD = 'current_timestamp';
 
     /**
      * @param array $row
@@ -53,6 +57,6 @@ abstract class AbstractDateColumnFactory extends AbstractTypedColumnFactory
      */
     protected function isDefaultTimestamp(array $row): bool
     {
-        return strtolower((string)$this->getDefault($row)) === self::CURRENT_TIMESTAMP_KEYWORD;
+        return strpos(strtolower((string)$this->getDefault($row)), self::CURRENT_TIMESTAMP_KEYWORD) !== false;
     }
 }

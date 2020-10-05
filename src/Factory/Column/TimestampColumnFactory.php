@@ -34,6 +34,7 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory\Column;
 
 
+use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
 use BronOS\PhpSqlSchema\Column\ColumnInterface;
 use BronOS\PhpSqlSchema\Column\DateTime\TimestampColumn;
 use BronOS\PhpSqlSchema\Exception\ColumnDeclarationException;
@@ -66,11 +67,13 @@ class TimestampColumnFactory extends AbstractDateTimeColumnFactory implements Ti
      * @return ColumnInterface
      *
      * @throws ColumnDeclarationException
+     * @throws PhpSqlDiscoveryException
      */
     public function fromRow(array $row): ColumnInterface
     {
         return new TimestampColumn(
             $this->getName($row),
+            $this->parseSize($row[self::KEY_COLUMN_TYPE], true),
             $this->isNullable($row),
             $this->isDefaultTimestamp($row),
             $this->isOnUpdateTimestamp($row),

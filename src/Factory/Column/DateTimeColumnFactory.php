@@ -34,6 +34,7 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory\Column;
 
 
+use BronOS\PhpSqlDiscovery\Exception\PhpSqlDiscoveryException;
 use BronOS\PhpSqlSchema\Column\ColumnInterface;
 use BronOS\PhpSqlSchema\Column\DateTime\DateTimeColumn;
 use BronOS\PhpSqlSchema\Exception\ColumnDeclarationException;
@@ -66,11 +67,13 @@ class DateTimeColumnFactory extends AbstractDateTimeColumnFactory implements Dat
      * @return ColumnInterface
      *
      * @throws ColumnDeclarationException
+     * @throws PhpSqlDiscoveryException
      */
     public function fromRow(array $row): ColumnInterface
     {
         return new DateTimeColumn(
             $this->getName($row),
+            $this->parseSize($row[self::KEY_COLUMN_TYPE], true),
             $this->isDefaultTimestamp($row),
             $this->isOnUpdateTimestamp($row),
             $this->isNullable($row),

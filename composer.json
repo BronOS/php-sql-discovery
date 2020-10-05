@@ -20,7 +20,7 @@
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
-    "bronos/php-sql-schema": "1.*"
+    "bronos/php-sql-schema": "1.0.4"
   },
   "require-dev": {
     "phpunit/phpunit": "*"
@@ -34,5 +34,8 @@
     "psr-4": {
       "BronOS\\PhpSqlDiscovery\\Tests\\": "tests/"
     }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit --coverage-clover=coverage.xml"
   }
 }

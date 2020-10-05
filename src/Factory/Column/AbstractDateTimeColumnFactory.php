@@ -44,7 +44,7 @@ namespace BronOS\PhpSqlDiscovery\Factory\Column;
  */
 abstract class AbstractDateTimeColumnFactory extends AbstractDateColumnFactory
 {
-    private const ON_UPDATE_TIMESTAMP_KEYWORD = 'on update current_timestamp()';
+    private const ON_UPDATE_TIMESTAMP_KEYWORD = 'on update current_timestamp';
 
     /**
      * @param array $row
@@ -53,6 +53,6 @@ abstract class AbstractDateTimeColumnFactory extends AbstractDateColumnFactory
      */
     protected function isOnUpdateTimestamp(array $row): bool
     {
-        return strtolower($row[self::KEY_EXTRA]) === self::ON_UPDATE_TIMESTAMP_KEYWORD;
+        return strpos(strtolower($row[self::KEY_EXTRA]), self::ON_UPDATE_TIMESTAMP_KEYWORD) !== false;
     }
 }

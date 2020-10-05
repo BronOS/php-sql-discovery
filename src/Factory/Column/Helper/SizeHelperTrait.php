@@ -48,16 +48,21 @@ trait SizeHelperTrait
 {
     /**
      * @param string $columnType
+     * @param bool   $isOptional
      *
      * @return int
      *
      * @throws PhpSqlDiscoveryException
      */
-    protected function parseSize(string $columnType): int
+    protected function parseSize(string $columnType, bool $isOptional = false): int
     {
         preg_match('/.*?\((\d+)\)/', $columnType, $matches);
 
         if (count($matches) < 2) {
+            if ($isOptional) {
+                return 0;
+            }
+
             throw new PhpSqlDiscoveryException('Can\'t parse size');
         }
 
