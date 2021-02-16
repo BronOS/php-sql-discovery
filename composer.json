@@ -20,7 +20,7 @@
   "require": {
     "php": ">=7.4",
     "ext-pdo": "*",
-    "bronos/php-sql-schema": "1.0.4"
+    "bronos/php-sql-schema": "1.0.*"
   },
   "require-dev": {
     "phpunit/phpunit": "*"

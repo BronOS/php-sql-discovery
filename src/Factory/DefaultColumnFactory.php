@@ -46,6 +46,7 @@ use BronOS\PhpSqlDiscovery\Factory\Column\DoubleColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\EnumColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\FloatColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\IntColumnFactory;
+use BronOS\PhpSqlDiscovery\Factory\Column\JsonColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\LongBlobColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\LongTextColumnFactory;
 use BronOS\PhpSqlDiscovery\Factory\Column\MediumBlobColumnFactory;
@@ -104,7 +105,8 @@ class DefaultColumnFactory extends ColumnFactory
             new TinyIntColumnFactory(),
             new TinyTextColumnFactory(),
             new VarBinaryColumnFactory(),
-            new VarCharColumnFactory()
+            new VarCharColumnFactory(),
+            new JsonColumnFactory()
         );
     }
 }
