@@ -48,14 +48,14 @@ use BronOS\PhpSqlSchema\Exception\ColumnDeclarationException;
  */
 interface TypedColumnFactoryInterface
 {
-    public const KEY_COLUMN_NAME = 'column_name';
-    public const KEY_COLUMN_TYPE = 'column_type';
-    public const KEY_COLUMN_DEFAULT = 'column_default';
-    public const KEY_IS_NULLABLE = 'is_nullable';
-    public const KEY_COLUMN_COMMENT = 'column_comment';
-    public const KEY_EXTRA = 'extra';
-    public const KEY_CHARACTER_SET_NAME = 'character_set_name';
-    public const KEY_COLLATION_NAME = 'collation_name';
+    public const KEY_COLUMN_NAME = 'COLUMN_NAME';
+    public const KEY_COLUMN_TYPE = 'COLUMN_TYPE';
+    public const KEY_COLUMN_DEFAULT = 'COLUMN_DEFAULT';
+    public const KEY_IS_NULLABLE = 'IS_NULLABLE';
+    public const KEY_COLUMN_COMMENT = 'COLUMN_COMMENT';
+    public const KEY_EXTRA = 'EXTRA';
+    public const KEY_CHARACTER_SET_NAME = 'CHARACTER_SET_NAME';
+    public const KEY_COLLATION_NAME = 'COLLATION_NAME';
 
     /**
      * Returns type of column.

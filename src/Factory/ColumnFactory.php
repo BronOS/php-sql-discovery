@@ -78,7 +78,7 @@ class ColumnFactory implements ColumnFactoryInterface
      */
     public function fromRow(array $row): ColumnInterface
     {
-        return $this->getTypedColumnFactory($row[self::KEY_DATA_TYPE])->fromRow($row);
+         return $this->getTypedColumnFactory($row[self::KEY_DATA_TYPE])->fromRow($row);
     }
 
     /**

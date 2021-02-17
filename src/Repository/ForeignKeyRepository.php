@@ -65,8 +65,8 @@ class ForeignKeyRepository extends AbstractRepository implements ForeignKeyRepos
                    KCU.REFERENCED_COLUMN_NAME, 
                    RC.UPDATE_RULE, 
                    RC.DELETE_RULE
-            FROM `information_schema`.`KEY_COLUMN_USAGE` KCU
-            LEFT JOIN `information_schema`.`REFERENTIAL_CONSTRAINTS` RC ON (
+            FROM `INFORMATION_SCHEMA`.`KEY_COLUMN_USAGE` KCU
+            LEFT JOIN `INFORMATION_SCHEMA`.`REFERENTIAL_CONSTRAINTS` RC ON (
                 RC.`TABLE_NAME` = :table 
                     AND 
                 RC.`CONSTRAINT_SCHEMA` = :schema 

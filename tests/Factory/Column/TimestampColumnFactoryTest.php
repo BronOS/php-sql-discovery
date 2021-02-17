@@ -26,11 +26,11 @@ class TimestampColumnFactoryTest extends BaseTestCase
 
         $this->assertEquals('TIMESTAMP', $clm->getType());
         $this->assertEquals('t_timestamp', $clm->getName());
-        $this->assertFalse($clm->isDefaultTimestamp());
+        $this->assertTrue($clm->isDefaultTimestamp());
         $this->assertTrue($clm->isOnUpdateTimestamp());
         $this->assertNull($clm->getComment());
         $this->assertFalse($clm->isNullable());
         $this->assertFalse($clm->isDefaultNull());
-        $this->assertEquals('0000-00-00 00:00:00', $clm->getDefault());
+        $this->assertEquals('CURRENT_TIMESTAMP', $clm->getDefault());
     }
 }

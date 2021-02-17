@@ -89,8 +89,8 @@ class TableRepository extends AbstractRepository implements TableRepositoryInter
                T.ENGINE, 
                T.TABLE_COLLATION, 
                CCSA.CHARACTER_SET_NAME
-        FROM information_schema.TABLES T
-        LEFT JOIN information_schema.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
+        FROM INFORMATION_SCHEMA.TABLES T
+        LEFT JOIN INFORMATION_SCHEMA.COLLATION_CHARACTER_SET_APPLICABILITY CCSA ON (
             T.TABLE_COLLATION = CCSA.COLLATION_NAME
         )
         WHERE TABLE_SCHEMA = ?";

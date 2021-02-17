@@ -26,10 +26,10 @@ class DateColumnFactoryTest extends BaseTestCase
 
         $this->assertEquals('DATE', $clm->getType());
         $this->assertEquals('t_date', $clm->getName());
-        $this->assertTrue($clm->isDefaultTimestamp());
+        $this->assertFalse($clm->isDefaultTimestamp());
         $this->assertNull($clm->getComment());
         $this->assertFalse($clm->isNullable());
         $this->assertFalse($clm->isDefaultNull());
-        $this->assertEquals('current_timestamp()', $clm->getDefault());
+        $this->assertNull($clm->getDefault());
     }
 }

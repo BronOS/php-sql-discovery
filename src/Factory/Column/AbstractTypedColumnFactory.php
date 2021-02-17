@@ -34,6 +34,8 @@ declare(strict_types=1);
 namespace BronOS\PhpSqlDiscovery\Factory\Column;
 
 
+use BronOS\PhpSqlSchema\Column\ColumnInterface;
+
 /**
  * Abstract typed column factory.
  *
@@ -62,6 +64,10 @@ abstract class AbstractTypedColumnFactory implements TypedColumnFactoryInterface
     protected function getDefault(array $row): ?string
     {
         $default = $row[self::KEY_COLUMN_DEFAULT];
+
+        if (is_null($default) && $this->isNullable($row)) {
+            return ColumnInterface::NULL_KEYWORD;
+        }
 
         if (is_null($default)) {
             return null;

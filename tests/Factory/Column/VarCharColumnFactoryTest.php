@@ -27,7 +27,7 @@ class VarCharColumnFactoryTest extends BaseTestCase
         $this->assertEquals('VARCHAR', $clm->getType());
         $this->assertEquals('t_varchar', $clm->getName());
         $this->assertEquals(222, $clm->getSize());
-        $this->assertEquals("ddd''sss", $clm->getDefault());
+        $this->assertEquals("ddd'sss", $clm->getDefault());
         $this->assertEquals('latin1', $clm->getCharset());
         $this->assertEquals('latin1_swedish_ci', $clm->getCollate());
         $this->assertNull($clm->getComment());

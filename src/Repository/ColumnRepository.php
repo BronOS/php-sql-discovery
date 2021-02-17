@@ -59,18 +59,18 @@ class ColumnRepository extends AbstractRepository implements ColumnRepositoryInt
     {
         return $this->fetchAll("
             SELECT 
-                   column_name, 
-                   data_type, 
-                   column_type, 
-                   column_default, 
-                   is_nullable, 
-                   column_comment,
-                   extra,
-                   character_set_name,
-                   collation_name
-            FROM information_schema.columns 
-            WHERE (table_schema = ? AND table_name = ?)
-            ORDER BY ordinal_position
+                   COLUMN_NAME, 
+                   DATA_TYPE, 
+                   COLUMN_TYPE, 
+                   COLUMN_DEFAULT, 
+                   IS_NULLABLE, 
+                   COLUMN_COMMENT,
+                   EXTRA,
+                   CHARACTER_SET_NAME,
+                   COLLATION_NAME
+            FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE (TABLE_SCHEMA = ? AND TABLE_NAME = ?)
+            ORDER BY ORDINAL_POSITION
         ", [
             $this->fetchDbName(),
             $tableName,

@@ -57,11 +57,11 @@ class DefaultsRepository extends AbstractRepository implements DefaultsRepositor
     {
         return $this->fetchOne("
                 SELECT 
-                   S.default_character_set_name, 
-                   S.default_collation_name,
-                   (SELECT ENGINE FROM INFORMATION_SCHEMA.ENGINES WHERE SUPPORT = 'DEFAULT' LIMIT 1) AS default_engine
-                FROM information_schema.schemata S
-                WHERE S.schema_name = ?;
+                   S.DEFAULT_CHARACTER_SET_NAME, 
+                   S.DEFAULT_COLLATION_NAME,
+                   (SELECT ENGINE FROM INFORMATION_SCHEMA.ENGINES WHERE SUPPORT = 'DEFAULT' LIMIT 1) AS DEFAULT_ENGINE
+                FROM INFORMATION_SCHEMA.SCHEMATA S
+                WHERE S.SCHEMA_NAME = ?;
             ",
             [$this->fetchDbName()]
         );

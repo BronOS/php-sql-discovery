@@ -31,6 +31,6 @@ class DateTimeColumnFactoryTest extends BaseTestCase
         $this->assertNull($clm->getComment());
         $this->assertTrue($clm->isNullable());
         $this->assertFalse($clm->isDefaultNull());
-        $this->assertEquals('current_timestamp()', $clm->getDefault());
+        $this->assertEquals('CURRENT_TIMESTAMP', $clm->getDefault());
     }
 }

@@ -17,24 +17,24 @@ class ColumnRepositoryTest extends BaseTestCase
 
         $idRow = $rows[0];
 
-        $this->assertArrayHasKey('column_name', $idRow);
-        $this->assertArrayHasKey('data_type', $idRow);
-        $this->assertArrayHasKey('column_type', $idRow);
-        $this->assertArrayHasKey('column_default', $idRow);
-        $this->assertArrayHasKey('is_nullable', $idRow);
-        $this->assertArrayHasKey('column_comment', $idRow);
-        $this->assertArrayHasKey('extra', $idRow);
-        $this->assertArrayHasKey('character_set_name', $idRow);
-        $this->assertArrayHasKey('collation_name', $idRow);
+        $this->assertArrayHasKey('COLUMN_NAME', $idRow);
+        $this->assertArrayHasKey('DATA_TYPE', $idRow);
+        $this->assertArrayHasKey('COLUMN_TYPE', $idRow);
+        $this->assertArrayHasKey('COLUMN_DEFAULT', $idRow);
+        $this->assertArrayHasKey('IS_NULLABLE', $idRow);
+        $this->assertArrayHasKey('COLUMN_COMMENT', $idRow);
+        $this->assertArrayHasKey('EXTRA', $idRow);
+        $this->assertArrayHasKey('CHARACTER_SET_NAME', $idRow);
+        $this->assertArrayHasKey('COLLATION_NAME', $idRow);
 
-        $this->assertEquals('id', $idRow['column_name']);
-        $this->assertEquals('int', $idRow['data_type']);
-        $this->assertEquals('int(11) unsigned', $idRow['column_type']);
-        $this->assertNull($idRow['column_default']);
-        $this->assertEquals('NO', $idRow['is_nullable']);
-        $this->assertEquals('', $idRow['column_comment']);
-        $this->assertEquals('auto_increment', $idRow['extra']);
-        $this->assertNull($idRow['character_set_name']);
-        $this->assertNull($idRow['collation_name']);
+        $this->assertEquals('id', $idRow['COLUMN_NAME']);
+        $this->assertEquals('int', $idRow['DATA_TYPE']);
+        $this->assertEquals('int(11) unsigned', $idRow['COLUMN_TYPE']);
+        $this->assertNull($idRow['COLUMN_DEFAULT']);
+        $this->assertEquals('NO', $idRow['IS_NULLABLE']);
+        $this->assertEquals('', $idRow['COLUMN_COMMENT']);
+        $this->assertEquals('auto_increment', $idRow['EXTRA']);
+        $this->assertNull($idRow['CHARACTER_SET_NAME']);
+        $this->assertNull($idRow['COLLATION_NAME']);
     }
 }

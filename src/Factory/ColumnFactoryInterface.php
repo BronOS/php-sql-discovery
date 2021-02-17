@@ -48,7 +48,7 @@ use BronOS\PhpSqlSchema\Exception\ColumnDeclarationException;
  */
 interface ColumnFactoryInterface
 {
-    public const KEY_DATA_TYPE = 'data_type';
+    public const KEY_DATA_TYPE = 'DATA_TYPE';
 
     /**
      * Makes column object from database row.
